@@ -1,2 +1,2 @@
-# lite6_moveit_resources
-Simplified moveit resource files for ufactory lite 6 robot.
+# Introduction
+This package aims to simplify the setup of the UFactory lite6 robot with moveit and MoveItConfigsBuilder. 
