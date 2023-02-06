@@ -8,6 +8,7 @@
     </p>
   </description>
   <author email="peterdavidfagan@gmail.com">Peter David Fagan</author>
+  <maintainer email="peterdavidfagan@gmail.com">Peter David Fagan</maintainer>
   <license>BSD</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

@@ -3,6 +3,7 @@
   <name>moveit_resources_lite6_description</name>
   <description>lite6 Resources used for MoveIt</description>
   <author email="peterdavidfagan@gmail.com">Peter David Fagan</author>
+  <maintainer email="peterdavidfagan@gmail.com">Peter David Fagan</maintainer>
   <version>0.0.0</version>
   <license>BSD</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
