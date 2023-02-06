@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: moveit_resources_lite6_description
+    relative_path: urdf/lite6.urdf
+  SRDF:
+    relative_path: config/lite6.srdf
+  CONFIG:
+    author_name: Peter David Fagan
+    author_email: peterdavidfagan@gmail.com
+    generated_timestamp: 1675698835
