@@ -35,4 +35,4 @@ lite6_traj_controller:
       - joint5
       - joint6
     state_publish_rate: 200
-    action_monitor_rate: 10
+    action_monitor_rate: 10.0
