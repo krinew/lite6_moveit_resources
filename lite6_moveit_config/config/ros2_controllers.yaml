@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 200  # Hz
+    update_rate: 100  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -34,5 +34,5 @@ lite6_traj_controller:
       - joint4
       - joint5
       - joint6
-    state_publish_rate: 200
+    state_publish_rate: 100
     action_monitor_rate: 10.0
