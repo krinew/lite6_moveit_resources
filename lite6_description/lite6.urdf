@@ -207,7 +207,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="../meshes/lite6/collision/link3.stl"/>
+        <mesh filename="meshes/lite6/collision/link3.stl"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
