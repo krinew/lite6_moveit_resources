@@ -356,7 +356,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/gripper/base_link_collision.STL"/>
+        <mesh filename="meshes/gripper/base_link.STL"/>
       </geometry>
     </collision>
   </link>
