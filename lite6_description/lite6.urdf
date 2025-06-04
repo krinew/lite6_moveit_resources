@@ -307,14 +307,14 @@
   <link name="link_gripper">
   <visual>
     <geometry>
-      <mesh filename="meshes/gripper/visual/gripper.stl"/>
+      <mesh filename="meshes/lite6/visual/gripper_lite.stl"/>
     </geometry>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <material name="Gray"/>
   </visual>
   <collision>
     <geometry>
-      <mesh filename="meshes/gripper/collision/gripper.stl"/>
+      <mesh filename="meshes/lite6/collision/gripper_lite.stl"/>
     </geometry>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </collision>
