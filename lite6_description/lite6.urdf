@@ -352,7 +352,7 @@
 <!-- Joint connecting gripper base directly to robot's link6 -->
 <joint name="joint_gripper" type="fixed">
   <parent link="link6"/>
-  <child link="link_eef"/>
+  <child link="base_link"/>
   <origin xyz="0 0 0" rpy="0 0 0"/>
 </joint>
 
@@ -675,6 +675,7 @@
     <parent link="link6"/>
     <child link="link_eef"/>
   </joint>
+  
   <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
