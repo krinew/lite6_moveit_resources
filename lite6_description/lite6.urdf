@@ -35,7 +35,7 @@
       <param name="baud_checkset">True</param>
       <param name="default_gripper_baud">2000000</param>
       <param name="robot_type">lite</param>
-      <param name="add_gripper">False</param>
+      <param name="add_gripper">True</param>
     </hardware>
     <joint name="joint1">
       <command_interface name="position">
