@@ -483,7 +483,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/gripper/right_outer_knuckle.stl"/>
+        <mesh filename="meshes/gripper/right_outer_knuckle.STL"/>
       </geometry>
       <material name="Silver">
         <color rgba="0.753 0.753 0.753 1.0"/>
@@ -492,7 +492,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/gripper/right_outer_knuckle.stl"/>
+        <mesh filename="meshes/gripper/right_outer_knuckle.STL"/>
       </geometry>
     </collision>
   </link>
