@@ -480,8 +480,8 @@
 <joint name="right_finger_joint" type="revolute">
   <parent link="base_link"/>
   <child link="right_outer_knuckle"/>
-  <origin xyz="-0.04 0 0.06" rpy="0 0 0"/>  <!-- Mirror of left finger -->
-  <axis xyz="0 0 -1"/>  <!-- Opposite direction -->
+  <origin xyz="-0.04 0 0.06" rpy="0 0 3.14159265"/>  <!-- Mirror of left finger -->
+  <axis xyz="0 0 1"/>  <!-- Opposite direction -->
   <limit effort="20.0" lower="0" upper="0.8" velocity="2.0"/>
   <mimic joint="left_finger_joint" multiplier="1" offset="0"/>
   <dynamics damping="0.1" friction="0.1"/>
@@ -650,7 +650,7 @@
   <gazebo reference="base_link">
   <selfCollide>true</selfCollide>
 </gazebo>
-  <gazebo reference="left_outer_knuckle">
+  <!-- <gazebo reference="left_outer_knuckle">
     <selfCollide>true</selfCollide>
   </gazebo>
   <gazebo reference="left_inner_knuckle">
@@ -667,7 +667,7 @@
   </gazebo>
   <gazebo reference="right_finger">
     <selfCollide>true</selfCollide>
-  </gazebo>
+  </gazebo> -->
 
   <link name="link_eef"/>
   <joint name="joint_eef" type="fixed">
