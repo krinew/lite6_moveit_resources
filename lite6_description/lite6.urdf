@@ -420,15 +420,8 @@
     <mimic joint="left_finger_joint" multiplier="-1" offset="0"/>
   </joint>
 
-  <!-- Gripper drive joint (for open/close commands) -->
-  <joint name="drive_joint" type="prismatic">
-    <origin xyz="0 0 0.0836" rpy="0 0 0"/>
-    <parent link="uflite_gripper_link"/>
-    <child link="left_finger_link"/>
-    <!-- Note: In this configuration, drive_joint is effectively the same as left_finger_joint.
-         You may either rename drive_joint → left_finger_joint or keep them separate.
-         For ros2_control, we’ll treat left_finger_joint as the controlled joint. -->
-  </joint>
+ 
+
 
   <!-- ====================== Transmissions ====================== -->
 
