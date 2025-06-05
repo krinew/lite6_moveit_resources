@@ -17,12 +17,16 @@
   <material name="Silver">
     <color rgba="0.753 0.753 0.753 1.0"/>
   </material>
+
+  <!-- world → base -->
   <link name="world"/>
   <joint name="world_joint" type="fixed">
     <parent link="world"/>
     <child link="link_base"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
+
+  <!-- ros2_control / hardware setup -->
   <ros2_control name="uf_robot_hardware/UFRobotSystemHardware" type="system">
     <hardware>
       <plugin>uf_robot_hardware/UFRobotSystemHardware</plugin>
@@ -37,102 +41,89 @@
       <param name="robot_type">lite</param>
       <param name="add_gripper">True</param>
     </hardware>
+
+    <!-- Joints 1–6 (position‐controlled) -->
     <joint name="joint1">
       <command_interface name="position">
         <param name="min">-6.283185307179586</param>
-        <param name="max">6.283185307179586</param>
+        <param name="max"> 6.283185307179586</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="max"> 3.14</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <!-- <state_interface name="effort"/> -->
     </joint>
+
     <joint name="joint2">
       <command_interface name="position">
         <param name="min">-2.61799</param>
-        <param name="max">2.61799</param>
+        <param name="max"> 2.61799</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="max"> 3.14</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <!-- <state_interface name="effort"/> -->
     </joint>
+
     <joint name="joint3">
       <command_interface name="position">
         <param name="min">-0.061087</param>
-        <param name="max">5.235988</param>
+        <param name="max"> 5.235988</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="max"> 3.14</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <!-- <state_interface name="effort"/> -->
     </joint>
+
     <joint name="joint4">
       <command_interface name="position">
         <param name="min">-6.283185307179586</param>
-        <param name="max">6.283185307179586</param>
+        <param name="max"> 6.283185307179586</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="max"> 3.14</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <!-- <state_interface name="effort"/> -->
     </joint>
+
     <joint name="joint5">
       <command_interface name="position">
         <param name="min">-2.1642</param>
-        <param name="max">2.1642</param>
+        <param name="max"> 2.1642</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="max"> 3.14</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <!-- <state_interface name="effort"/> -->
     </joint>
+
     <joint name="joint6">
       <command_interface name="position">
         <param name="min">-6.283185307179586</param>
-        <param name="max">6.283185307179586</param>
+        <param name="max"> 6.283185307179586</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3.14</param>
-        <param name="max">3.14</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <!-- <state_interface name="effort"/> -->
-    </joint>
-
-    <!-- Gripper drive joint control (main actuated joint) -->
-    <joint name="drive_joint">
-      <command_interface name="position">
-        <param name="min">0.0</param>
-        <param name="max">0.85</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-2.0</param>
-        <param name="max">2.0</param>
+        <param name="max"> 3.14</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-
   </ros2_control>
-  
-  <!-- Robot arm links and joints (unchanged) -->
+
+  <!-- ====================== Lite-6 Arm Links & Joints ====================== -->
+
   <link name="link_base">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.00829544579053192 3.26357432323433E-05 0.0631194584987089"/>
@@ -153,7 +144,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
+
+  <joint name="joint1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0.2435"/>
+    <parent link="link_base"/>
+    <child link="link1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="50.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
   <link name="link1">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.00036 0.04195 -0.0025"/>
@@ -174,16 +174,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
-  <joint name="joint1" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.2435"/>
-    <parent link="link_base"/>
-    <child link="link1"/>
+
+  <joint name="joint2" type="revolute">
+    <origin rpy="1.5708 -1.5708 3.1416" xyz="0 0 0"/>
+    <parent link="link1"/>
+    <child link="link2"/>
     <axis xyz="0 0 1"/>
-    <limit effort="50.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
+    <limit effort="50.0" lower="-2.61799" upper="2.61799" velocity="3.14"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+
   <link name="link2">
     <inertial>
       <origin rpy="0 0 0" xyz="0.179 0.0 0.0584"/>
@@ -204,16 +204,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
-  <joint name="joint2" type="revolute">
-    <origin rpy="1.5708 -1.5708 3.1416" xyz="0 0 0"/>
-    <parent link="link1"/>
-    <child link="link2"/>
+
+  <joint name="joint3" type="revolute">
+    <origin rpy="-3.1416 0 1.5708" xyz="0.2002 0 0"/>
+    <parent link="link2"/>
+    <child link="link3"/>
     <axis xyz="0 0 1"/>
-    <limit effort="50.0" lower="-2.61799" upper="2.61799" velocity="3.14"/>
+    <limit effort="32.0" lower="-0.061087" upper="5.235988" velocity="3.14"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+
   <link name="link3">
     <inertial>
       <origin rpy="0 0 0" xyz="0.072 -0.0357 -0.001"/>
@@ -234,16 +234,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
-  <joint name="joint3" type="revolute">
-    <origin rpy="-3.1416 0 1.5708" xyz="0.2002 0 0"/>
-    <parent link="link2"/>
-    <child link="link3"/>
+
+  <joint name="joint4" type="revolute">
+    <origin rpy="1.5708 0 0" xyz="0.087 -0.22761 0"/>
+    <parent link="link3"/>
+    <child link="link4"/>
     <axis xyz="0 0 1"/>
-    <limit effort="32.0" lower="-0.061087" upper="5.235988" velocity="3.14"/>
+    <limit effort="32.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+
   <link name="link4">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.002 -0.0285 -0.0813"/>
@@ -264,16 +264,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
-  <joint name="joint4" type="revolute">
-    <origin rpy="1.5708 0 0" xyz="0.087 -0.22761 0"/>
-    <parent link="link3"/>
-    <child link="link4"/>
+
+  <joint name="joint5" type="revolute">
+    <origin rpy="1.5708 0 0" xyz="0 0 0"/>
+    <parent link="link4"/>
+    <child link="link5"/>
     <axis xyz="0 0 1"/>
-    <limit effort="32.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
+    <limit effort="32.0" lower="-2.1642" upper="2.1642" velocity="3.14"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+
   <link name="link5">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 0.01 0.0019"/>
@@ -294,16 +294,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
-  <joint name="joint5" type="revolute">
-    <origin rpy="1.5708 0 0" xyz="0 0 0"/>
-    <parent link="link4"/>
-    <child link="link5"/>
+
+  <joint name="joint6" type="revolute">
+    <origin rpy="-1.5708 0 0" xyz="0 0.0625 0"/>
+    <parent link="link5"/>
+    <child link="link6"/>
     <axis xyz="0 0 1"/>
-    <limit effort="32.0" lower="-2.1642" upper="2.1642" velocity="3.14"/>
+    <limit effort="20.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-  
+
   <link name="link6">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 -0.00194 -0.0102"/>
@@ -324,289 +324,127 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  
-  <joint name="joint6" type="revolute">
-    <origin rpy="-1.5708 0 0" xyz="0 0.0625 0"/>
-    <parent link="link5"/>
-    <child link="link6"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="20.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
-  </joint>
 
-  <!-- GRIPPER ASSEMBLY - Based on xacro gripper definition -->
-  
-  <!-- Gripper Base Link -->
-  <link name="xarm_gripper_base_link">
+  <!-- ====================== New Parallel-Jaw Gripper ====================== -->
+
+  <!-- GRIPPER PALM (fixed to link6) -->
+  <link name="uflite_gripper_link">
     <inertial>
-      <origin xyz="-0.00065489 -0.0018497 0.048028" rpy="0 0 0"/>
-      <mass value="0.54156"/>
-      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" 
-               iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
+      <!-- Taken from your original Xacro inertial properties -->
+      <origin xyz="0 0 0.030" rpy="0 0 0"/>
+      <mass    value="0.28"/>
+      <inertia
+        ixx="0.00047106" ixy="3.9292e-07" ixz="2.6537e-06"
+        iyy="0.00033072" iyz="-1.0975e-05" izz="0.00025642"/>
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/gripper/base_link.STL"/>
+        <mesh filename="meshes/lite6/visual/gripper_lite.stl"/>
       </geometry>
-      <material name="White">
-        <color rgba="1.0 1.0 1.0 1.0"/>
-      </material>
+      <material name="White"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/gripper/base_link.STL"/>
+        <mesh filename="meshes/lite6/collision/gripper_lite.stl"/>
       </geometry>
     </collision>
   </link>
 
-  <!-- Fixed joint connecting gripper base to robot's link6 -->
   <joint name="gripper_fix" type="fixed">
-    <parent link="link6"/>
-    <child link="xarm_gripper_base_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
-
-  <!-- Left Outer Knuckle -->
-  <link name="left_outer_knuckle">
-    <inertial>
-      <origin xyz="2.9948E-14 0.021559 0.015181" rpy="0 0 0"/>
-      <mass value="0.033618"/>
-      <inertia ixx="1.9111E-05" ixy="-1.8803E-17" ixz="-1.1002E-17"
-               iyy="6.6256E-06" iyz="-7.3008E-06" izz="1.3185E-05"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/left_outer_knuckle.STL"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.753 0.753 0.753 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/left_outer_knuckle.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Drive Joint (main actuated joint) -->
-  <joint name="drive_joint" type="revolute">
-    <origin xyz="0 0.035 0.059098" rpy="0 0 0"/>
-    <parent link="xarm_gripper_base_link"/>
-    <child link="left_outer_knuckle"/>
-    <axis xyz="1 0 0"/>
-    <limit lower="0" upper="0.85" effort="50" velocity="2"/>
-  </joint>
-
-  <!-- Left Finger -->
-  <link name="left_finger">
-    <inertial>
-      <origin xyz="-2.4536E-14 -0.016413 0.029258" rpy="0 0 0"/>
-      <mass value="0.048304"/>
-      <inertia ixx="1.7493E-05" ixy="-4.2156E-19" ixz="6.9164E-18"
-               iyy="1.7225E-05" iyz="4.6433E-06" izz="5.1466E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/left_finger.STL"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.753 0.753 0.753 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/left_finger.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Left Finger Joint (mimic drive joint) -->
-  <joint name="left_finger_joint" type="revolute">
-    <origin xyz="0 0.035465 0.042039" rpy="0 0 0"/>
-    <parent link="left_outer_knuckle"/>
-    <child link="left_finger"/>
-    <axis xyz="-1 0 0"/>
-    <limit lower="0" upper="0.85" effort="50" velocity="2"/>
-    <mimic joint="drive_joint" multiplier="1" offset="0"/>
-  </joint>
-
-  <!-- Left Inner Knuckle -->
-  <link name="left_inner_knuckle">
-    <inertial>
-      <origin xyz="1.86600784687907E-06 0.0220467847633621 0.0261334672830885" rpy="0 0 0"/>
-      <mass value="0.0230125781256706"/>
-      <inertia ixx="6.09490024271906E-06" ixy="6.06651326160071E-11" ixz="7.19102670500635E-11"
-               iyy="6.01955084375188E-06" iyz="-2.75316812991721E-06" izz="5.07862004479903E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/left_inner_knuckle.STL"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.753 0.753 0.753 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/left_inner_knuckle.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Left Inner Knuckle Joint (mimic drive joint) -->
-  <joint name="left_inner_knuckle_joint" type="revolute">
-    <origin xyz="0 0.02 0.074098" rpy="0 0 0"/>
-    <parent link="xarm_gripper_base_link"/>
-    <child link="left_inner_knuckle"/>
-    <axis xyz="1 0 0"/>
-    <limit lower="0" upper="0.85" effort="50" velocity="2"/>
-    <mimic joint="drive_joint" multiplier="1" offset="0"/>
-  </joint>
-
-  <!-- Right Outer Knuckle -->
-  <link name="right_outer_knuckle">
-    <inertial>
-      <origin xyz="-3.1669E-14 -0.021559 0.015181" rpy="0 0 0"/>
-      <mass value="0.033618"/>
-      <inertia ixx="1.9111E-05" ixy="-1.8789E-17" ixz="1.0986E-17"
-               iyy="6.6256E-06" iyz="7.3008E-06" izz="1.3185E-05"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/right_outer_knuckle.STL"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.753 0.753 0.753 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/right_outer_knuckle.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Right Outer Knuckle Joint (mimic drive joint) -->
-  <joint name="right_outer_knuckle_joint" type="revolute">
-    <origin xyz="0 -0.035 0.059098" rpy="0 0 0"/>
-    <parent link="xarm_gripper_base_link"/>
-    <child link="right_outer_knuckle"/>
-    <axis xyz="-1 0 0"/>
-    <limit lower="0" upper="0.85" effort="50" velocity="2"/>
-    <mimic joint="drive_joint" multiplier="1" offset="0"/>
-  </joint>
-
-  <!-- Right Finger -->
-  <link name="right_finger">
-    <inertial>
-      <origin xyz="2.5618E-14 0.016413 0.029258" rpy="0 0 0"/>
-      <mass value="0.048304"/>
-      <inertia ixx="1.7493E-05" ixy="-5.0014E-19" ixz="-7.5079E-18"
-               iyy="1.7225E-05" iyz="-4.6435E-06" izz="5.1466E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/right_finger.STL"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.753 0.753 0.753 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/right_finger.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Right Finger Joint (mimic drive joint) -->
-  <joint name="right_finger_joint" type="revolute">
-    <origin xyz="0 -0.035465 0.042039" rpy="0 0 0"/>
-    <parent link="right_outer_knuckle"/>
-    <child link="right_finger"/>
-    <axis xyz="1 0 0"/>
-    <limit lower="0" upper="0.85" effort="50" velocity="2"/>
-    <mimic joint="drive_joint" multiplier="1" offset="0"/>
-  </joint>
-
-  <!-- Right Inner Knuckle -->
-  <link name="right_inner_knuckle">
-    <inertial>
-      <origin xyz="1.866E-06 -0.022047 0.026133" rpy="0 0 0"/>
-      <mass value="0.023013"/>
-      <inertia ixx="6.0949E-06" ixy="-6.0665E-11" ixz="7.191E-11"
-               iyy="6.0197E-06" iyz="2.7531E-06" izz="5.0784E-06"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/right_inner_knuckle.STL"/>
-      </geometry>
-      <material name="Silver">
-        <color rgba="0.753 0.753 0.753 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/gripper/right_inner_knuckle.STL"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <!-- Right Inner Knuckle Joint (mimic drive joint) -->
-  <joint name="right_inner_knuckle_joint" type="revolute">
-    <origin xyz="0 -0.02 0.074098" rpy="0 0 0"/>
-    <parent link="xarm_gripper_base_link"/>
-    <child link="right_inner_knuckle"/>
-    <axis xyz="-1 0 0"/>
-    <limit lower="0" upper="0.85" effort="50" velocity="2"/>
-    <mimic joint="drive_joint" multiplier="1" offset="0"/>
-  </joint>
-
-  <!-- TCP Link -->
-  <link name="link_tcp"/>
-
-  <joint name="joint_tcp" type="fixed">
-    <origin xyz="0 0 0.172" rpy="0 0 0"/>
-    <parent link="xarm_gripper_base_link"/>
-    <child link="link_tcp"/>
-  </joint>
-
-  <!-- End Effector Link -->
-  <link name="link_eef"/>
-  
-  <joint name="joint_eef" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
     <parent link="link6"/>
-    <child link="link_eef"/>
+    <child link="uflite_gripper_link"/>
   </joint>
 
-  <!-- Transmissions -->
+  <!-- LEFT FINGER (actuated prismatic) -->
+  <link name="left_finger_link">
+    <inertial>
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
+      <mass    value="0.05"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+    <visual>
+      <!-- Simple box placeholder for finger -->
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.04 0.02"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.04 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_finger_joint" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="uflite_gripper_link"/>
+    <child link="left_finger_link"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0.00" upper="0.04" effort="10.0" velocity="0.02"/>
+  </joint>
+
+  <!-- RIGHT FINGER (mimics left, slides on –Y) -->
+  <link name="right_finger_link">
+    <inertial>
+      <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+      <mass    value="0.05"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.04 0.02"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.04 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_finger_joint" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="uflite_gripper_link"/>
+    <child link="right_finger_link"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.00" upper="0.04" effort="10.0" velocity="0.02"/>
+    <mimic joint="left_finger_joint" multiplier="-1" offset="0"/>
+  </joint>
+
+  <!-- Gripper drive joint (for open/close commands) -->
+  <joint name="drive_joint" type="prismatic">
+    <origin xyz="0 0 0.0836" rpy="0 0 0"/>
+    <parent link="uflite_gripper_link"/>
+    <child link="left_finger_link"/>
+    <!-- Note: In this configuration, drive_joint is effectively the same as left_finger_joint.
+         You may either rename drive_joint → left_finger_joint or keep them separate.
+         For ros2_control, we’ll treat left_finger_joint as the controlled joint. -->
+  </joint>
+
+  <!-- ====================== Transmissions ====================== -->
+
+  <!-- Gripper transmission -->
   <transmission name="gripper_transmission">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="drive_joint">
+    <joint name="left_finger_joint">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
-    <actuator name="gripper_motor">
+    <actuator name="motor_gripper">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
 
+  <!-- Transmissions for Joints 1–6 -->
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
@@ -617,12 +455,7 @@
       <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
-  
 
-
-
-
-  <!-- 1. Complete the transmission2 that was cut off and fix the motor name in transmission4 -->
   <transmission name="tran2">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint2">
@@ -650,7 +483,7 @@
     <joint name="joint4">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
-    <actuator name="motor3">
+    <actuator name="motor4">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       <mechanicalReduction>100</mechanicalReduction>
     </actuator>
@@ -673,12 +506,12 @@
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor6">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardware_interface>
       <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
 
-  <!-- 2. Add Gazebo properties for all links -->
+  <!-- ====================== Gazebo Properties ====================== -->
   <gazebo reference="link_base">
     <selfCollide>true</selfCollide>
   </gazebo>
@@ -702,56 +535,21 @@
   </gazebo>
 
   <!-- Gripper Gazebo properties -->
-  <gazebo reference="xarm_gripper_base_link">
+  <gazebo reference="uflite_gripper_link">
     <selfCollide>true</selfCollide>
   </gazebo>
-  <gazebo reference="left_outer_knuckle">
+  <gazebo reference="left_finger_link">
     <selfCollide>true</selfCollide>
   </gazebo>
-  <gazebo reference="left_inner_knuckle">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="left_finger">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="right_outer_knuckle">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="right_inner_knuckle">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="right_finger">
+  <gazebo reference="right_finger_link">
     <selfCollide>true</selfCollide>
   </gazebo>
 
-  <!-- 3. Gazebo plugin configuration -->
-  <!-- <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
-      <parameters>/home/rad/Code/lite6_ws/install/xarm_controller/share/xarm_controller/config/lite6_controllers.yaml</parameters>
-    </plugin>
-  </gazebo> -->
-    <gazebo>
+  <!-- Gazebo plugin -->
+  <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
       <parameters>/home/rad/Code/lite6_ws/install/xarm_controller/share/xarm_controller/config/lite6_controllers.yaml</parameters>
     </plugin>
   </gazebo>
-
-
 </robot>
-
-<!-- ADDITIONAL CORRECTIONS NEEDED: -->
-
-<!-- 1. REMOVE the duplicate link_eef definition in your URDF (you have it twice) -->
-
-<!-- 2. FIX the mesh file paths in gripper links - change from: -->
-<!-- <mesh filename="meshes/gripper/base_link.stl"/> -->
-<!-- TO: -->
-<!-- <mesh filename="meshes/xarm_gripper/base_link.stl"/> -->
-<!-- (Apply this to ALL gripper mesh references) -->
-
-<!-- 3. ADD missing left_inner_finger and right_inner_finger links and joints if your xacro has them -->
-
-<!-- 4. CORRECT the TCP frame position - in xacro it's typically at gripper tip, not 0.172m offset -->
- 
