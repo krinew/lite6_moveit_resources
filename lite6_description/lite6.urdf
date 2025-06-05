@@ -506,7 +506,7 @@
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor6">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardware_interface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
